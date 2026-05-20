@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tạo SĐT Việt Nam Random</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  padding:18px;
+  background:#f4f6f8;
+  font-family:Arial,sans-serif;
+  color:#222;
+}
+
+.wrap{
+  max-width:1200px;
+  margin:auto;
+  background:#fff;
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.08);
+}
+
+h1{
+  margin:0 0 15px;
+  font-size:30px;
+}
+
+.note{
+  background:#eef6ff;
+  border:1px solid #cfe3ff;
+  border-radius:12px;
+  padding:14px;
+  line-height:1.6;
+  margin-bottom:18px;
+}
+
+.box{
+  background:#fafafa;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:15px;
+  margin-bottom:18px;
+}
+
+.box-title{
+  font-weight:700;
+  margin-bottom:12px;
+}
+
+.carriers{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.carrier{
+  border:1px solid #ddd;
+  border-radius:12px;
+  padding:12px;
+  background:#fff;
+  min-width:250px;
+  flex:1 1 280px;
+}
+
+.carrier input{
+  transform:scale(1.15);
+  margin-right:8px;
+}
+
+.prefix{
+  font-size:13px;
+  color:#666;
+  margin-top:5px;
+  line-height:1.5;
+}
+
+.controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+input[type=number]{
+  width:120px;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  font-size:16px;
+}
+
+button{
+  border:none;
+  border-radius:10px;
+  padding:10px 14px;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:600;
+}
+
+.primary{
+  background:#2563eb;
+  color:#fff;
+}
+
+.gray{
+  background:#e5e7eb;
+}
+
+.red{
+  background:#dc2626;
+  color:#fff;
+}
+
+.status{
+  margin-bottom:15px;
+  font-size:14px;
+  color:#555;
+}
+
+.list{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:12px;
+}
+
+.item{
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  padding:14px;
+  background:#fafafa;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.name{
+  font-size:17px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.phone{
+  font-size:16px;
+  font-weight:600;
+  margin-bottom:4px;
+}
+
+.network{
+  font-size:13px;
+  color:#666;
+}
+
+.copy{
+  background:#111827;
+  color:#fff;
+  font-size:13px;
+  padding:8px 10px;
+  border-radius:8px;
+  white-space:nowrap;
+}
+
+.footer{
+  margin-top:18px;
+  font-size:13px;
+  color:#666;
+  line-height:1.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<h1>Tạo số điện thoại Việt Nam</h1>
+
+<div class="note">
+- Random họ tên tiếng Việt<br>
+- Random số điện thoại Việt Nam<br>
+- Chọn nhà mạng muốn tạo<br>
+- Không tạo lại số cũ<br>
+- Loại bỏ các mẫu số đẹp phổ biến
+</div>
+
+<div class="box">
+
+<div class="box-title">Chọn nhà mạng</div>
+
+<div style="margin-bottom:12px;">
+<button class="gray" onclick="selectAll()">Chọn tất cả</button>
+<button class="gray" onclick="clearAll()">Bỏ chọn</button>
+</div>
+
+<div class="carriers">
+
+<label class="carrier">
+<input type="checkbox" class="carrier-check" value="viettel" checked>
+<strong>Viettel</strong>
+<div class="prefix">
+032 033 034 035 036 037 038 039 086 096 097 098
+</div>
+</label>
+
+<label class="carrier">
+<input type="checkbox" class="carrier-check" value="vinaphone" checked>
+<strong>VinaPhone</strong>
+<div class="prefix">
+081 082 083 084 085 088 091 094
+</div>
+</label>
+
+<label class="carrier">
+<input type="checkbox" class="carrier-check" value="mobifone" checked>
+<strong>MobiFone</strong>
+<div class="prefix">
+070 076 077 078 079 089 090 093
+</div>
+</label>
+
+<label class="carrier">
+<input type="checkbox" class="carrier-check" value="vietnamobile">
+<strong>Vietnamobile</strong>
+<div class="prefix">
+052 056 058 092
+</div>
+</label>
+
+<label class="carrier">
+<input type="checkbox" class="carrier-check" value="gmobile">
+<strong>Gmobile</strong>
+<div class="prefix">
+059 099
+</div>
+</label>
+
+<label class="carrier">
+<input type="checkbox" class="carrier-check" value="itel">
+<strong>iTel</strong>
+<div class="prefix">
+087
+</div>
+</label>
+
+<label class="carrier">
+<input type="checkbox" class="carrier-check" value="wintel">
+<strong>Wintel</strong>
+<div class="prefix">
+055
+</div>
+</label>
+
+</div>
+</div>
+
+<div class="controls">
+<label><strong>Số lượng:</strong></label>
+
+<input id="qty" type="number" value="20" min="1" max="500">
+
+<button class="primary" onclick="generateData()">Tạo dữ liệu</button>
+
+<button class="gray" onclick="copyAll()">Copy tất cả</button>
+
+<button class="red" onclick="clearHistory()">Xóa lịch sử</button>
+</div>
+
+<div class="status" id="status">
+Chưa tạo dữ liệu
+</div>
+
+<div class="list" id="result"></div>
+
+<div class="footer">
+Dữ liệu copy:<br>
+Tên | Số điện thoại | Nhà mạng
+</div>
+
+</div>
+
+<script>
+
+const CARRIER_PREFIXES = {
+  viettel:["032","033","034","035","036","037","038","039","086","096","097","098"],
+  vinaphone:["081","082","083","084","085","088","091","094"],
+  mobifone:["070","076","077","078","079","089","090","093"],
+  vietnamobile:["052","056","058","092"],
+  gmobile:["059","099"],
+  itel:["087"],
+  wintel:["055"]
+};
+
+const CARRIER_NAMES = {
+  viettel:"Viettel",
+  vinaphone:"VinaPhone",
+  mobifone:"MobiFone",
+  vietnamobile:"Vietnamobile",
+  gmobile:"Gmobile",
+  itel:"iTel",
+  wintel:"Wintel"
+};
+
+const STORAGE_KEY = "VN_PHONE_HISTORY_V7";
+
+const HO = [
+"Nguyễn","Trần","Lê","Phạm","Hoàng","Huỳnh","Phan",
+"Vũ","Võ","Đặng","Bùi","Đỗ","Hồ","Ngô","Dương"
+];
+
+const DEM = [
+"Văn","Đức","Minh","Gia","Anh","Thanh","Ngọc",
+"Hoài","Khánh","Quang","Xuân","Bảo","Hữu","Kim"
+];
+
+const TEN = [
+"An","Anh","Ân","Bảo","Bình","Chi","Dũng","Đạt",
+"Giang","Hà","Hiếu","Hoa","Hùng","Khánh","Lan",
+"Linh","Long","Mai","Minh","My","Nam","Ngân",
+"Ngọc","Nhi","Phong","Phúc","Phương","Quân",
+"Quỳnh","Sơn","Thảo","Thiên","Thu","Trang",
+"Trung","Tuấn","Uyên","Việt"
+];
+
+function rand(min,max){
+  return Math.floor(Math.random()*(max-min+1))+min;
+}
+
+function pick(arr){
+  return arr[rand(0,arr.length-1)];
+}
+
+function randomDigits(n){
+  let s="";
+  for(let i=0;i<n;i++){
+    s+=rand(0,9);
+  }
+  return s;
+}
+
+function randomName(){
+  return `${pick(HO)} ${pick(DEM)} ${pick(TEN)}`;
+}
+
+function getSelectedCarriers(){
+  return [...document.querySelectorAll(".carrier-check:checked")]
+  .map(i=>i.value);
+}
+
+function getPrefixes(){
+  const carriers=getSelectedCarriers();
+  let arr=[];
+
+  carriers.forEach(c=>{
+    arr=arr.concat(CARRIER_PREFIXES[c]);
+  });
+
+  return arr;
+}
+
+function detectCarrier(phone){
+  const p=phone.slice(0,3);
+
+  for(let k in CARRIER_PREFIXES){
+    if(CARRIER_PREFIXES[k].includes(p)){
+      return CARRIER_NAMES[k];
+    }
+  }
+
+  return "Unknown";
+}
+
+function formatPhone(phone){
+  return phone.replace(/(\d{4})(\d{3})(\d{3})/,"$1 $2 $3");
+}
+
+function loadHistory(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(!raw)return new Set();
+    return new Set(JSON.parse(raw));
+  }catch{
+    return new Set();
+  }
+}
+
+function saveHistory(set){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify([...set]));
+}
+
+function isBad(phone){
+
+  const tail=phone.slice(-6);
+
+  if(/(\d)\1\1\1/.test(phone)) return true;
+
+  if(/0123|1234|2345|3456|4567|5678|6789/.test(phone))
+    return true;
+
+  if(/9876|8765|7654|6543|5432|4321/.test(phone))
+    return true;
+
+  if(/^(\d\d)\1\1$/.test(tail))
+    return true;
+
+  if(/^(\d)\1+$/.test(tail))
+    return true;
+
+  return false;
+}
+
+function generatePhone(history,batch,prefixes){
+
+  let tries=0;
+
+  while(tries<20000){
+
+    const prefix=pick(prefixes);
+    const phone=prefix+randomDigits(7);
+
+    if(history.has(phone)){
+      tries++;
+      continue;
+    }
+
+    if(batch.has(phone)){
+      tries++;
+      continue;
+    }
+
+    if(isBad(phone)){
+      tries++;
+      continue;
+    }
+
+    return phone;
+  }
+
+  return null;
+}
+
+function generateData(){
+
+  const qtyInput=document.getElementById("qty");
+  const result=document.getElementById("result");
+  const status=document.getElementById("status");
+
+  let qty=parseInt(qtyInput.value);
+
+  if(isNaN(qty)||qty<1) qty=1;
+  if(qty>500) qty=500;
+
+  const prefixes=getPrefixes();
+
+  if(prefixes.length===0){
+    alert("Hãy chọn ít nhất 1 nhà mạng");
+    return;
+  }
+
+  const history=loadHistory();
+  const batch=new Set();
+
+  const data=[];
+
+  let attempts=0;
+
+  while(data.length<qty && attempts<qty*25000){
+
+    const phone=generatePhone(history,batch,prefixes);
+
+    if(phone){
+
+      batch.add(phone);
+
+      data.push({
+        name:randomName(),
+        phone,
+        carrier:detectCarrier(phone)
+      });
+    }
+
+    attempts++;
+  }
+
+  batch.forEach(p=>history.add(p));
+  saveHistory(history);
+
+  window.generatedData=data;
+
+  result.innerHTML="";
+
+  data.forEach(item=>{
+
+    const div=document.createElement("div");
+    div.className="item";
+
+    const left=document.createElement("div");
+
+    left.innerHTML=`
+      <div class="name">${item.name}</div>
+      <div class="phone">${formatPhone(item.phone)}</div>
+      <div class="network">${item.carrier}</div>
+    `;
+
+    const btn=document.createElement("button");
+    btn.className="copy";
+    btn.textContent="Copy";
+
+    btn.onclick=async()=>{
+
+      try{
+        await navigator.clipboard.writeText(
+          `${item.name} | ${item.phone} | ${item.carrier}`
+        );
+
+        btn.textContent="Đã copy";
+
+        setTimeout(()=>{
+          btn.textContent="Copy";
+        },1000);
+
+      }catch{
+        alert("Không copy được");
+      }
+    };
+
+    div.appendChild(left);
+    div.appendChild(btn);
+
+    result.appendChild(div);
+
+  });
+
+  status.textContent=`Đã tạo ${data.length}/${qty} dữ liệu`;
+}
+
+async function copyAll(){
+
+  if(!window.generatedData || window.generatedData.length===0){
+    alert("Chưa có dữ liệu");
+    return;
+  }
+
+  const text=window.generatedData.map(
+    i=>`${i.name} | ${i.phone} | ${i.carrier}`
+  ).join("\n");
+
+  try{
+    await navigator.clipboard.writeText(text);
+    alert("Đã copy toàn bộ");
+  }catch{
+    alert("Không copy được");
+  }
+}
+
+function clearHistory(){
+
+  const ok=confirm("Xóa toàn bộ lịch sử số đã tạo?");
+
+  if(!ok) return;
+
+  localStorage.removeItem(STORAGE_KEY);
+
+  alert("Đã xóa lịch sử");
+}
+
+function selectAll(){
+  document.querySelectorAll(".carrier-check")
+  .forEach(i=>i.checked=true);
+}
+
+function clearAll(){
+  document.querySelectorAll(".carrier-check")
+  .forEach(i=>i.checked=false);
+}
+
+window.generatedData=[];
+
+generateData();
+
+</script>
+
+</body>
+</html>
