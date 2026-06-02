@@ -84,13 +84,36 @@ h1{
 .controls{
   display:flex;
   flex-wrap:wrap;
-  gap:10px;
+  gap:15px;
   align-items:center;
   margin-bottom:18px;
 }
 
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.name-options {
+  display: flex;
+  gap: 12px;
+  background: #eee;
+  padding: 6px 12px;
+  border-radius: 10px;
+}
+
+.name-options label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
 input[type=number]{
-  width:120px;
+  width:90px;
   padding:10px;
   border-radius:10px;
   border:1px solid #ccc;
@@ -184,7 +207,7 @@ button{
 <h1>Tạo số điện thoại Việt Nam</h1>
 
 <div class="note">
-- Random họ tên tiếng Việt<br>
+- Random họ tên tiếng Việt hoặc tiếng Nước Ngoài<br>
 - Random số điện thoại Việt Nam<br>
 - Chọn nhà mạng muốn tạo<br>
 - Không tạo lại số cũ<br>
@@ -262,9 +285,18 @@ button{
 </div>
 
 <div class="controls">
-<label><strong>Số lượng:</strong></label>
+<div class="control-group">
+  <label><strong>Số lượng:</strong></label>
+  <input id="qty" type="number" value="20" min="1" max="500">
+</div>
 
-<input id="qty" type="number" value="20" min="1" max="500">
+<div class="control-group">
+  <label><strong>Loại tên:</strong></label>
+  <div class="name-options">
+    <label><input type="radio" name="name_type" value="vi" checked> Tên Việt</label>
+    <label><input type="radio" name="name_type" value="en"> Tên Nước Ngoài</label>
+  </div>
+</div>
 
 <button class="primary" onclick="generateData()">Tạo dữ liệu</button>
 
@@ -310,23 +342,43 @@ const CARRIER_NAMES = {
 
 const STORAGE_KEY = "VN_PHONE_HISTORY_V7";
 
-const HO = [
+// Dữ liệu Tên Việt Nam
+const HO_VI = [
 "Nguyễn","Trần","Lê","Phạm","Hoàng","Huỳnh","Phan",
 "Vũ","Võ","Đặng","Bùi","Đỗ","Hồ","Ngô","Dương"
 ];
 
-const DEM = [
+const DEM_VI = [
 "Văn","Đức","Minh","Gia","Anh","Thanh","Ngọc",
 "Hoài","Khánh","Quang","Xuân","Bảo","Hữu","Kim"
 ];
 
-const TEN = [
+const TEN_VI = [
 "An","Anh","Ân","Bảo","Bình","Chi","Dũng","Đạt",
 "Giang","Hà","Hiếu","Hoa","Hùng","Khánh","Lan",
 "Linh","Long","Mai","Minh","My","Nam","Ngân",
 "Ngọc","Nhi","Phong","Phúc","Phương","Quân",
 "Quỳnh","Sơn","Thảo","Thiên","Thu","Trang",
 "Trung","Tuấn","Uyên","Việt"
+];
+
+// Dữ liệu Tên Nước Ngoài (Anh/Mỹ phổ biến)
+const FIRST_NAME_EN = [
+"James","John","Robert","Michael","William","David","Richard","Joseph","Thomas","Charles",
+"Christopher","Daniel","Matthew","Anthony","Mark","Donald","Steven","Paul","Andrew","Joshua",
+"Mary","Patricia","Jennifer","Linda","Elizabeth","Barbara","Susan","Jessica","Sarah","Karen",
+"Nancy","Lisa","Betty","Margaret","Sandra","Ashley","Kimberly","Emily","Donna","Michelle"
+];
+
+const MIDDLE_NAME_EN = [
+"Alan","Alexander","Edward","Francis","George","Henry","Lee","Louis","Ray","Roy",
+"Ann","Grace","Jane","Jean","Lee","Lynn","Marie","May","Rose","Louise"
+];
+
+const LAST_NAME_EN = [
+"Smith","Johnson","Williams","Brown","Jones","Garcia","Miller","Davis","Rodriguez","Martinez",
+"Hernandez","Lopez","Gonzalez","Wilson","Anderson","Thomas","Taylor","Moore","Jackson","Martin",
+"Lee","Perez","Thompson","White","Harris","Sanchez","Clark","Ramirez","Lewis","Robinson"
 ];
 
 function rand(min,max){
@@ -345,8 +397,16 @@ function randomDigits(n){
   return s;
 }
 
-function randomName(){
-  return `${pick(HO)} ${pick(DEM)} ${pick(TEN)}`;
+function randomName(type){
+  if(type === "en") {
+    // Tỉ lệ 50% có tên đệm cho tự nhiên
+    if(Math.random() > 0.5) {
+      return `${pick(FIRST_NAME_EN)} ${pick(MIDDLE_NAME_EN)} ${pick(LAST_NAME_EN)}`;
+    }
+    return `${pick(FIRST_NAME_EN)} ${pick(LAST_NAME_EN)}`;
+  } else {
+    return `${pick(HO_VI)} ${pick(DEM_VI)} ${pick(TEN_VI)}`;
+  }
 }
 
 function getSelectedCarriers(){
@@ -451,6 +511,7 @@ function generateData(){
   const qtyInput=document.getElementById("qty");
   const result=document.getElementById("result");
   const status=document.getElementById("status");
+  const nameType=document.querySelector('input[name="name_type"]:checked').value;
 
   let qty=parseInt(qtyInput.value);
 
@@ -480,7 +541,7 @@ function generateData(){
       batch.add(phone);
 
       data.push({
-        name:randomName(),
+        name:randomName(nameType),
         phone,
         carrier:detectCarrier(phone)
       });
